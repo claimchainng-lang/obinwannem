@@ -731,20 +731,7 @@ async function handleRegister() {
   const { data, error } = await sb.auth.signUp({ email, password });
   if (error) { toast(error.message, true); return; }
 
-  if (data.user) {
-    const { error: profileError } = await sb.from('profiles').insert({
-      id: data.user.id,
-      full_name: first + ' ' + last,
-      email: email,
-      country: country,
-      membership_tier: tier,
-      membership_status: 'active',
-      joined_at: new Date().toISOString(),
-      renewal_due_at: new Date(Date.now() + 365*24*60*60*1000).toISOString()
-    });
-    if (profileError) { toast('Account created but profile setup had an issue: ' + profileError.message, true); }
-  }
-  toast('Welcome to Obinwannem! Your account has been created.');
+toast('Account created successfully! Please check your email and click the verification link before signing in.');
   closeModal();
 }
 
@@ -753,7 +740,7 @@ async function handleLogout() {
   currentUser = null; currentProfile = null;
   showPage('home');
   updateNav(false);
-  toast('You have signed out. Nọ na udo!');
+  toast('You have signed out.  ofu obi!');
 }
 
 // ── NAV AUTH STATE ──
